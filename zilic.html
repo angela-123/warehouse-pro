@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #mycv{
+            border-radius: 20px;
+        }
+        
+        img{
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body bgColor = "green yellow">
+<video id = "myvid" height = "300" width = "300" controls = "controls" autoplay>
+</video>
+<canvas id = "mycv" height = "200" width = "200"></canvas>
+<p><a href = "#" onclick = "snap()">Take a picture</a></p>
+<div  id = "myroll" draggable = "true" ondragstart = "dragIt(event);" ondragover = "event.preventDefault();" ondrop = "dropIt(event);"></div>
+
+
+
+<script>
+ var video = document.getElementById("myvid");
+ var cvx = document.getElementById("mycv"); 
+ var pform = document.getElementById("pform");
+ navigator.getUserMedia({video:true,audio:true},
+   function (stream){
+   video.src = stream;
+},
+
+  function (err){
+
+  document.write("Not a video compatible driver");
+}
+
+
+  
+
+)
+
+
+</script>
+<script>
+function snap()
+{
+myvd = document.getElementById("myvid");
+snapshot = document.getElementById("mycv");
+myroll = document.getElementById("myroll");
+kamag = document.getElementById("kamag");
+rform = document.getElementById("mowo");
+
+
+
+snapshot.width = myvid.clientWidth;
+snapshot.height = myvid.clientHeight;
+c = snapshot.getContext("2d");
+
+
+c.drawImage(myvid,0,0,snapshot.width,snapshot.height);
+
+img = document.createElement("img");
+img.src = snapshot.toDataURL("image/png");
+
+img.style.padding = 5
+img.width = snapshot.width/2
+img.height = snapshot.height/2
+myroll.appendChild(img)
+rform.appendChild(img2);
+
+
+
+}
+
+function dragIt(theEvent)
+{
+	theEvent.dataTransfer.setData("Text",theEvent.target.id);
+	
+	}
+	
+	function dropIt(theEvent)
+	{
+		var theData = theEvent.dataTransfer.getData("Text");
+		var theDraggedElement = document.getElementById(theData);
+		theEvent.target.appendChild(theDraggedElement);
+		theEvent.preventDefault();
+	}
+</script>
+
+
+<div id = "ldiv">
+
+</div>
+
+<div align = "left" id = "fdiv">
+
+
+
+</div>
+
+
+
+</body>
+</html>
